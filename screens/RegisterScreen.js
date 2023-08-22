@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   Pressable,
+  Alert,
 } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -13,12 +14,40 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const navigation = useNavigation();
+
+  const handleRegister = () => {
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
+    axios
+      .post(`http://192.168.28.244:3000/register`, user)
+      // .post(`http://${process.env.SECRET_HOST}:3000/register`, user)
+      .then((response) => {
+        console.log(response);
+        Alert.alert(
+          'Registration successful',
+          'You have been registered successfully'
+        );
+        setName('');
+        setEmail('');
+        setPassword('');
+      })
+      .catch((error) => {
+        Alert.alert('Registration failed', 'an error during registration ');
+        console.log('error', error);
+      });
+  };
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: 'white', alignItems: 'center' }}
@@ -142,6 +171,7 @@ const RegisterScreen = () => {
         <View style={{ marginTop: 45 }} />
 
         <Pressable
+          onPress={handleRegister}
           style={{
             width: 200,
             backgroundColor: 'black',
@@ -166,10 +196,10 @@ const RegisterScreen = () => {
 
         <Pressable
           style={{ marginTop: 10 }}
-          onPress={() => navigation.navigate('Register')}
+          onPress={() => navigation.goBack()}
         >
           <Text style={{ textAlign: 'center', fontSize: 16 }}>
-            Don't have an account? Sign up
+            Already have an account? Sign In
           </Text>
         </Pressable>
       </KeyboardAvoidingView>
