@@ -30,8 +30,8 @@ const RegisterScreen = () => {
     };
 
     axios
-      .post(`http://192.168.28.244:3000/register`, user)
-      // .post(`http://${process.env.SECRET_HOST}:3000/register`, user)
+      // .post(`http://192.168.28.244:3000/register`, user)
+      .post(`http://${process.env.SECRET_HOST}:3000/register`, user)
       .then((response) => {
         console.log(response);
         Alert.alert(

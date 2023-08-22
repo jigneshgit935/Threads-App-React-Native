@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,16 +7,60 @@ import {
   Text,
   TextInput,
   Pressable,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem('authToken');
+
+        if (token) {
+          setTimeout(() => {
+            navigation.replace('Home');
+          }, 400);
+        }
+      } catch (error) {
+        console.log('error', error);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  const handleLogin = () => {
+    const user = {
+      email: email,
+      password: password,
+    };
+
+    axios
+      // .post(`http://192.168.28.244:3000/login`, user)
+      .post(`http://${SECRET_HOST}:3000/login`, user)
+      .then((response) => {
+        console.log(response);
+        const token = response.data.token;
+
+        AsyncStorage.setItem('authToken', token);
+        navigation.navigate('Home');
+      })
+      .catch((error) => {
+        Alert.alert('Login Error');
+        console.log('error', error);
+      });
+  };
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: 'white', alignItems: 'center' }}
@@ -121,6 +165,7 @@ const LoginScreen = () => {
         <View style={{ marginTop: 45 }} />
 
         <Pressable
+          onPress={handleLogin}
           style={{
             width: 200,
             backgroundColor: 'black',
