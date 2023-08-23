@@ -141,3 +141,21 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Login failed' });
   }
 });
+
+// endpoint to access all the users (except the login user)
+
+app.get('/user/:userId', (req, res) => {
+  try {
+    const loggedInUserId = req.params.userId;
+    User.find({ _id: { $ne: loggedInUserId } })
+      .then((users) => {
+        res.status(200).json(users);
+      })
+      .catch((error) => {
+        console.log('Error', error);
+        res.status(500).json('error');
+      });
+  } catch (error) {
+    res.status(500).json({ message: 'error getting the users' });
+  }
+});
