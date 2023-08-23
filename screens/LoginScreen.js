@@ -28,7 +28,7 @@ const LoginScreen = () => {
 
         if (token) {
           setTimeout(() => {
-            navigation.replace('Home');
+            navigation.replace('Main');
           }, 400);
         }
       } catch (error) {
@@ -46,7 +46,8 @@ const LoginScreen = () => {
     };
 
     axios
-      .post(`http://${SECRET_HOST}:3000/login`, user)
+      .post(`http://localhost:3000/login`, user)
+      // .post(`http://${SECRET_HOST}:3000/login`, user)
       .then((response) => {
         console.log(response);
         const token = response.data.token;

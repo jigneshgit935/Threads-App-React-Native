@@ -30,7 +30,8 @@ const RegisterScreen = () => {
     };
 
     axios
-      .post(`http://${process.env.SECRET_HOST}:3000/register`, user)
+      .post(`http://localhost:3000/register`, user)
+      // .post(`http://${process.env.SECRET_HOST}:3000/register`, user)
       .then((response) => {
         console.log(response);
         Alert.alert(
