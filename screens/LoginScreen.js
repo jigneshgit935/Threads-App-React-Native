@@ -46,7 +46,7 @@ const LoginScreen = () => {
     };
 
     axios
-      .post(`http://192.168.28.244:3000/login`, user)
+      .post(`http://localhost:3000/login`, user)
       // .post(`http://${SECRET_HOST}:3000/login`, user)
       .then((response) => {
         console.log(response);

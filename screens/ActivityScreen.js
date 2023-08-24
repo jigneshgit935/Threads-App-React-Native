@@ -32,7 +32,7 @@ const ActivityScreen = () => {
       setUserId(userId);
 
       axios
-        .get(`http://192.168.28.244:3000/user/${userId}`)
+        .get(`http://locahost:3000/user/${userId}`)
         .then((response) => {
           setUsers(response.data);
         })
