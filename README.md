@@ -6,3 +6,9 @@ https://github.com/jigneshgit935/Threads-App-React-Native/assets/102901231/0b2d1
 2.Login Screen (to login a register user only)
 
 
+
+
+
+
+
+
