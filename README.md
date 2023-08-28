@@ -26,7 +26,7 @@ https://github.com/jigneshgit935/Threads-App-React-Native/assets/102901231/f22b1
 
 https://github.com/jigneshgit935/Threads-App-React-Native/assets/102901231/2453dfd3-9787-4d2d-8143-7c2035f40d3f
 
-7.User Profile and Logout Section (we have one follower which is dynamically) :
+7.User Profile and Logout Section (we have one follower which is appearing dynamically) :
 
 https://github.com/jigneshgit935/Threads-App-React-Native/assets/102901231/1bc98a6f-2d23-4efb-b64a-e9ca1b352cc2
 
